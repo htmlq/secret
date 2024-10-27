@@ -1,0 +1,11 @@
+name = "your-project-name"
+type = "javascript"
+
+[build]
+command = "npm run build"
+
+[env.production]
+workers_dev = true
+compatibility_date = "2024-10-27"
+
+# Add any other environment-specific settings here
