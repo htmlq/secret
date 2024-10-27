@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "next dev --turbo",
+    "build": "next build --turbo",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^13.5.7",
+    "next": "^13.5.7", // Ensure this version supports Turbopack
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
