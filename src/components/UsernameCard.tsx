@@ -19,7 +19,7 @@ export default function UsernameCard({ username }: UsernameCardProps) {
       <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center">
         <div className="w-12 h-12 relative">
           <Image
-            src="/fonts/snapchat-logo.png"
+            src="/fonts/app/snapchat-logo.png"
             alt="Snapchat"
             fill
             className="object-contain"
