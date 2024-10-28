@@ -1,10 +1,9 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{ts,tsx,js,jsx,mdx}",
   ],
   theme: {
     extend: {
@@ -15,13 +14,6 @@ const config: Config = {
     },
   },
   plugins: [],
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
-};
+} satisfies Config;
 
-<<<<<<< HEAD
 export default config;
-=======
-export default config;
->>>>>>> cbda32d4b2eb11a59ab2908772a405f3b8f1f79e
