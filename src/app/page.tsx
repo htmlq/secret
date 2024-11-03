@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import SearchBar from "@/components/SearchBar";
-import UsernameCard from "@/components/UsernameCard";
-import { usernames } from "@/data/usernames";
+import { useState } from 'react';
+import SearchBar from '@/components/SearchBar';
+import UsernameCard from '@/components/UsernameCard';
+import { usernames } from '@/data/usernames';
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredUsernames = usernames.filter((username) =>
+  const filteredUsernames = usernames.filter(username =>
     username.username.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
@@ -23,7 +23,7 @@ export default function Home() {
           <SearchBar onSearch={setSearchQuery} />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-            {filteredUsernames.map((username) => (
+            {filteredUsernames.map(username => (
               <UsernameCard key={username.username} username={username} />
             ))}
           </div>

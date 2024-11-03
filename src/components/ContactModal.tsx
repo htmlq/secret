@@ -1,5 +1,5 @@
-import { useState } from "react";
-export const runtime = "edge";
+import { useState } from 'react';
+export const runtime = 'edge';
 interface ContactModalProps {
   username: string;
   price: number;
@@ -17,8 +17,8 @@ export default function ContactModal({
   onClose,
   onSubmit,
 }: ContactModalProps) {
-  const [telegram, setTelegram] = useState("");
-  const [phone, setPhone] = useState("");
+  const [telegram, setTelegram] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,9 +45,7 @@ export default function ContactModal({
             ))}
           </ul>
         </div>
-        <h2 className="text-xl text-white font-bold mb-4">
-          Purchase {username}
-        </h2>
+        <h2 className="text-xl text-white font-bold mb-4">Purchase {username}</h2>
         <p className="text-yellow-500 font-bold mb-4">${price}</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -56,7 +54,7 @@ export default function ContactModal({
             <input
               type="text"
               value={telegram}
-              onChange={(e) => setTelegram(e.target.value)}
+              onChange={e => setTelegram(e.target.value)}
               placeholder="@username"
               className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-yellow-500"
             />
@@ -67,15 +65,13 @@ export default function ContactModal({
             <input
               type="tel"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={e => setPhone(e.target.value)}
               placeholder="+1234567890"
               className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-yellow-500"
             />
           </div>
 
-          <div className="text-sm text-gray-400">
-            At least one contact method is required
-          </div>
+          <div className="text-sm text-gray-400">At least one contact method is required</div>
 
           <div className="flex gap-4 mt-6">
             <button

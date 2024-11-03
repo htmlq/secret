@@ -6,7 +6,8 @@
     "dev": "next dev -p 8080 --turbo",
     "build": "next build",
     "start": "next start -p 8080",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "next": "14.0.3",
