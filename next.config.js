@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    turbo: true
-  }
+    turbo: {},
+  },
 };
 
 module.exports = nextConfig;
