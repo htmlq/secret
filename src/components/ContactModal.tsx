@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 export const runtime = "edge";
 interface ContactModalProps {
   username: string;
@@ -9,9 +9,16 @@ interface ContactModalProps {
   onSubmit: (data: { telegram?: string; phone?: string }) => void;
 }
 
-export default function ContactModal({ username, price, features, isOpen, onClose, onSubmit }: ContactModalProps) {
-  const [telegram, setTelegram] = useState('');
-  const [phone, setPhone] = useState('');
+export default function ContactModal({
+  username,
+  price,
+  features,
+  isOpen,
+  onClose,
+  onSubmit,
+}: ContactModalProps) {
+  const [telegram, setTelegram] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,9 +45,11 @@ export default function ContactModal({ username, price, features, isOpen, onClos
             ))}
           </ul>
         </div>
-        <h2 className="text-xl text-white font-bold mb-4">Purchase {username}</h2>
+        <h2 className="text-xl text-white font-bold mb-4">
+          Purchase {username}
+        </h2>
         <p className="text-yellow-500 font-bold mb-4">${price}</p>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-300 mb-2">Telegram Handle</label>
@@ -52,7 +61,7 @@ export default function ContactModal({ username, price, features, isOpen, onClos
               className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-yellow-500"
             />
           </div>
-          
+
           <div>
             <label className="block text-gray-300 mb-2">Phone Number</label>
             <input
