@@ -40,7 +40,7 @@ export default function ContactModal({
         orderId,
       });
 
-      window.location.href = response.data.invoice_url;
+      window.open(response.data.invoice_url, '_blank');
     } catch (error) {
       console.error('Payment creation failed:', error);
     } finally {

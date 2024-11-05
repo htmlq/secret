@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { amount, currency, orderId, redirectUrl } = req.body;
+    const { amount, currency, orderId } = req.body;
 
     try {
       const response = await axios.post(
