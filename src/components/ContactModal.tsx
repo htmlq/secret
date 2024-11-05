@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 export const runtime = 'edge';
 interface ContactModalProps {
   username: string;
@@ -7,6 +8,31 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { telegram?: string; phone?: string }) => void;
+}
+
+interface PaymentData {
+  payment_id: string;
+  payment_status: string;
+  pay_address: string;
+  price_amount: number;
+  price_currency: string;
+  pay_amount: number;
+  amount_received: number;
+  pay_currency: string;
+  order_id: string;
+  order_description: string;
+  [key: string]: any; // Allows extra properties, in case there are more fields
+}
+
+
+async function initiateNowPayment(username: string, price: number) {
+  try {
+    const response = await axios.post('/api/initiatePayment', { username, price });
+    return response.data;
+  } catch (error) {
+    console.error('NowPayments initiation failed:', error);
+    return null;
+  }
 }
 
 export default function ContactModal({
@@ -19,12 +45,16 @@ export default function ContactModal({
 }: ContactModalProps) {
   const [telegram, setTelegram] = useState('');
   const [phone, setPhone] = useState('');
+  const [paymentData, setPaymentData] = useState<PaymentData | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!telegram && !phone) return;
-    onSubmit({ telegram, phone });
-    onClose();
+
+    const paymentData = await initiateNowPayment(username, price);
+    if (paymentData) {
+      setPaymentData(paymentData);
+    }
   };
 
   if (!isOpen) return null;
@@ -32,7 +62,22 @@ export default function ContactModal({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-gray-800 rounded-lg p-6 w-96 max-w-[90%] relative">
-        <div className="absolute top-4 right-4 bg-gray-700 rounded-lg p-2 text-xs w-36">
+        {paymentData ? (<div>
+            <h2 className="text-xl text-white font-bold mb-4">Complete Your Payment</h2>
+            <p className="text-yellow-500 font-bold mb-4">Amount: {paymentData.pay_amount} BTC</p>
+            <p className="text-white mb-4">Send to Address:</p>
+            <p className="text-yellow-400 font-mono mb-4">{paymentData.pay_address}</p>
+            <p className="text-gray-400 text-sm mb-4">
+              Note: After sending the payment, please allow some time for confirmation. You'll receive a notification once it's completed.
+            </p>
+            <button
+              onClick={onClose}
+              className="flex-1 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+            >
+              Close
+            </button>
+          </div>) : (<>
+            <div className="absolute top-4 right-4 bg-gray-700 rounded-lg p-2 text-xs w-36">
           <h4 className="text-yellow-500 font-bold mb-1">Username Info</h4>
           <ul className="text-gray-300 space-y-0.5">
             {features.map((feature, index) => (
@@ -89,7 +134,7 @@ export default function ContactModal({
               Finalize
             </button>
           </div>
-        </form>
+        </form></>)}
       </div>
     </div>
   );
