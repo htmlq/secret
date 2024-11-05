@@ -1,3 +1,4 @@
+// pages/api/createPayment.js
 import axios from 'axios';
 
 export default async function handler(req, res) {
@@ -11,11 +12,13 @@ export default async function handler(req, res) {
           price_amount: amount,
           price_currency: currency,
           order_id: orderId,
-          success_url: redirectUrl,
+          success_url: process.env.BASE_URL,
+          cancel_url: process.env.BASE_URL,
+          ipn_callback_url: `${process.env.BASE_URL}/api/paymentCallback`, // Set IPN callback URL
         },
         {
           headers: {
-            'x-api-key': process.env.NOWPAYMENTS_API_KEY, // Store API key in .env.local
+            'x-api-key': process.env.NOWPAYMENTS_API_KEY,
             'Content-Type': 'application/json',
           },
         },

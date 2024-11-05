@@ -10,6 +10,10 @@ interface ContactModalProps {
   onSubmit: (data: { telegram?: string; phone?: string }) => void;
 }
 
+function generateOrderId() {
+  return `order_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+}
+
 export default function ContactModal({
   username,
   price,
@@ -26,12 +30,14 @@ export default function ContactModal({
     if (!telegram && !phone) return;
 
     setLoading(true)
+
+    const orderId = generateOrderId();
+
     try {
       const response = await axios.post('/api/createPayment', {
         amount: price,
         currency: 'USD',
-        orderId: 'order_12345',
-        redirectUrl: 'https://your-redirect-url.com',
+        orderId,
       });
 
       window.location.href = response.data.invoice_url;
