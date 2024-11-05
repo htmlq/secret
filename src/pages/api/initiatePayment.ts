@@ -5,6 +5,8 @@ const NOWPAYMENTS_API_KEY = process.env.NOWPAYMENTS_API_KEY;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log('Starting initiatePayment API');
+
   const { username, price } = req.body;
 
   try {
