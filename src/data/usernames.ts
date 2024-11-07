@@ -6,48 +6,48 @@ export interface Username {
 
 export const usernames: Username[] = [
   {
-    username: "snapking",
+    username: 'snapking',
     price: 999,
-    features: ["Original 2011 account", "Rare username", "Instant delivery"]
+    features: ['Original 2011 account', 'Rare username', 'Instant delivery'],
   },
   {
-    username: "gaming",
+    username: 'gaming',
     price: 2499,
-    features: ["Premium name", "High value", "Escrow available"]
+    features: ['Premium name', 'High value', 'Escrow available'],
   },
   {
-    username: "crypto",
+    username: 'crypto',
     price: 1899,
-    features: ["Short name", "Memorable", "Quick transfer"]
+    features: ['Short name', 'Memorable', 'Quick transfer'],
   },
   {
-    username: "metaverse",
+    username: 'metaverse',
     price: 3499,
-    features: ["Trending topic", "Premium status", "Instant setup"]
+    features: ['Trending topic', 'Premium status', 'Instant setup'],
   },
   {
-    username: "web3",
+    username: 'web3',
     price: 4999,
-    features: ["Ultra rare", "Three characters", "Escrow available"]
+    features: ['Ultra rare', 'Three characters', 'Escrow available'],
   },
   {
-    username: "nft_pro",
+    username: 'nft_pro',
     price: 1299,
-    features: ["NFT category", "Professional tag", "Fast delivery"]
+    features: ['NFT category', 'Professional tag', 'Fast delivery'],
   },
   {
-    username: "blockchain",
+    username: 'blockchain',
     price: 2199,
-    features: ["Tech domain", "Popular keyword", "Quick transfer"]
+    features: ['Tech domain', 'Popular keyword', 'Quick transfer'],
   },
   {
-    username: "defi_king",
+    username: 'defi_king',
     price: 1799,
-    features: ["Finance niche", "Unique suffix", "Instant delivery"]
+    features: ['Finance niche', 'Unique suffix', 'Instant delivery'],
   },
   {
-    username: "trader",
+    username: 'trader',
     price: 5999,
-    features: ["Premium short name", "High demand", "Escrow ready"]
-  }
+    features: ['Premium short name', 'High demand', 'Escrow ready'],
+  },
 ];

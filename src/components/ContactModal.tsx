@@ -1,5 +1,6 @@
 import { useState } from 'react';
-export const runtime = "edge";
+import axios from 'axios';
+export const runtime = 'edge';
 interface ContactModalProps {
   username: string;
   price: number;
@@ -9,15 +10,42 @@ interface ContactModalProps {
   onSubmit: (data: { telegram?: string; phone?: string }) => void;
 }
 
-export default function ContactModal({ username, price, features, isOpen, onClose, onSubmit }: ContactModalProps) {
+function generateOrderId() {
+  return `order_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+}
+
+export default function ContactModal({
+  username,
+  price,
+  features,
+  isOpen,
+  onClose,
+}: ContactModalProps) {
   const [telegram, setTelegram] = useState('');
   const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!telegram && !phone) return;
-    onSubmit({ telegram, phone });
-    onClose();
+
+    setLoading(true)
+
+    const orderId = generateOrderId();
+
+    try {
+      const response = await axios.post('/api/createPayment', {
+        amount: price,
+        currency: 'USD',
+        orderId,
+      });
+
+      window.open(response.data.invoice_url, '_blank');
+    } catch (error) {
+      console.error('Payment creation failed:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -40,33 +68,31 @@ export default function ContactModal({ username, price, features, isOpen, onClos
         </div>
         <h2 className="text-xl text-white font-bold mb-4">Purchase {username}</h2>
         <p className="text-yellow-500 font-bold mb-4">${price}</p>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-300 mb-2">Telegram Handle</label>
             <input
               type="text"
               value={telegram}
-              onChange={(e) => setTelegram(e.target.value)}
+              onChange={e => setTelegram(e.target.value)}
               placeholder="@username"
               className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-yellow-500"
             />
           </div>
-          
+
           <div>
             <label className="block text-gray-300 mb-2">Phone Number</label>
             <input
               type="tel"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={e => setPhone(e.target.value)}
               placeholder="+1234567890"
               className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-yellow-500"
             />
           </div>
 
-          <div className="text-sm text-gray-400">
-            At least one contact method is required
-          </div>
+          <div className="text-sm text-gray-400">At least one contact method is required</div>
 
           <div className="flex gap-4 mt-6">
             <button
@@ -81,7 +107,7 @@ export default function ContactModal({ username, price, features, isOpen, onClos
               disabled={!telegram && !phone}
               className="flex-1 px-4 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Finalize
+              {loading ? 'Processing...' : 'Finalize'}
             </button>
           </div>
         </form>

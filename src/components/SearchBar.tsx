@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-export const runtime = "edge";
+export const runtime = 'edge';
 interface SearchBarProps {
   onSearch: (query: string) => void;
 }
